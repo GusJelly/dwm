@@ -12,8 +12,8 @@ static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display 
 static const int showsystray        = 1;        /* 0 means no systray */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 0;        /* 0 means bottom bar */
-static const char *fonts[]          = { "Fixedsys Excelsior:size=13:antialias=true:autohint=false" };
-static const char dmenufont[]       = "Fixedsys Excelsior:size=13:antialias=true:autohint=false";
+static const char *fonts[]          = { "CaskaydiaCove Nerd Font Mono:size=9:antialias=true:autohint=false" };
+static const char dmenufont[]       = "CaskaydiaCove Nerd Font Mono:size=9:antialias=true:autohint=false";
 static const char col_gray1[]       = "#d3d7cf";
 static const char col_gray2[]       = "#d3d7cf";
 static const char col_gray3[]       = "#000000";
@@ -23,8 +23,8 @@ static const char col_evergreen[]   = "#2B573D";
 static const char col_yellow[]      = "#F5C700";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
-	[SchemeNorm] = { col_gray3, col_gray1, col_cyan },
-	[SchemeSel]  = { col_gray4, col_cyan,  col_gray2  },
+	[SchemeNorm] = { col_gray3, col_gray1, col_evergreen},
+	[SchemeSel]  = { col_gray4, col_evergreen,  col_gray2  },
 };
 
 /* tagging */
@@ -74,7 +74,7 @@ static const Layout layouts[] = {
 static const char *dmenucmd[] = { "dmenu_run", "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_evergreen, "-sf", col_gray4, NULL };
 static const char *roficmd[] = { "rofi", "-show", "drun", NULL };
 //static const char *powercmd[] = { "rofi", "-show", "power-menu", "-modi", "power-menu:rofi-power-menu" ,NULL };
-static const char *termcmd[]  = { "st", NULL };
+static const char *termcmd[]  = { "alacritty", NULL };
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
