@@ -222,6 +222,7 @@ static Client *nexttiled(Client *c);
 static void pop(Client *c);
 static void propertynotify(XEvent *e);
 // static void quit(const Arg *arg);
+static void quitprompt(const Arg *arg);
 static Monitor *recttomon(int x, int y, int w, int h);
 static void removesystrayicon(Client *i);
 static void resize(Client *c, int x, int y, int w, int h, int interact);
@@ -314,6 +315,7 @@ static void (*handler[LASTEvent]) (XEvent *) = {
 };
 static Atom wmatom[WMLast], netatom[NetLast], xatom[XLast];
 static int running = 1;
+static int restart = 1;
 static Cur *cursor[CurLast];
 static Clr **scheme;
 static Display *dpy;
@@ -883,6 +885,7 @@ void
 drawbar(Monitor *m)
 {
 	int x, w, tw = 0, stw = 0;
+    int tlpad;
 	int boxs = drw->fonts->h / 9;
 	int boxw = drw->fonts->h / 6 + 2;
 	unsigned int i, occ = 0, urg = 0;
@@ -913,9 +916,10 @@ drawbar(Monitor *m)
 		drw_setscheme(drw, scheme[m->tagset[m->seltags] & 1 << i ? SchemeSel : SchemeNorm]);
 		drw_text(drw, x, 0, w, bh, lrpad / 2, tags[i], urg & 1 << i);
 		if (occ & 1 << i)
-			drw_rect(drw, x + boxs, boxs, boxw, boxw,
-				m == selmon && selmon->sel && selmon->sel->tags & 1 << i,
-				urg & 1 << i);
+			drw_rect(drw, x + boxw, 0, w - ( 2 * boxw + 1), boxw,
+			    m == selmon && selmon->sel && selmon->sel->tags & 1 << i,
+			    urg & 1 << i);
+
 		x += w;
 	}
 	w = TEXTW(m->ltsymbol);
@@ -925,9 +929,11 @@ drawbar(Monitor *m)
 	if ((w = m->ww - tw - stw - x) > bh) {
 		if (m->sel) {
 			drw_setscheme(drw, scheme[m == selmon ? SchemeSel : SchemeNorm]);
-			drw_text(drw, x, 0, w, bh, lrpad / 2, m->sel->name, 0);
+			tlpad = MAX((m->ww - ((int)TEXTW(m->sel->name) - lrpad)) / 2 - x, lrpad / 2);
+			drw_text(drw, x, 0, w, bh, tlpad, m->sel->name, 0);
 			if (m->sel->isfloating)
-				drw_rect(drw, x + boxs, boxs, boxw, boxw, m->sel->isfixed, 0);
+				drw_rect(drw, x + boxs + tlpad - lrpad / 2, boxs,
+					boxw, boxw, m->sel->isfixed, 0);
 		} else {
 			drw_setscheme(drw, scheme[SchemeNorm]);
 			drw_rect(drw, x, 0, w, bh, 1, 1);
@@ -1483,6 +1489,31 @@ void
 quit(const Arg *arg)
 {
 	running = 0;
+}
+
+void
+quitprompt(const Arg *arg)
+{
+	FILE *pp = popen("echo -e \"no\nrestart\nyes\" | dmenu -i -sb red -p \"Quit DWM?\"", "r");
+	if(pp != NULL) {
+		char buf[1024];
+		if (fgets(buf, sizeof(buf), pp) == NULL) {
+			fprintf(stderr, "Quitprompt: Error reading pipe!\n");
+			return;
+		}
+		if (strcmp(buf, "yes\n") == 0) {
+			pclose(pp);
+			restart = 0;
+			quit(NULL);
+		} else if (strcmp(buf, "restart\n") == 0) {
+			pclose(pp);
+			restart = 1;
+			quit(NULL);
+		} else if (strcmp(buf, "no\n") == 0) {
+			pclose(pp);
+			return;
+		}
+	}
 }
 
 Monitor *
@@ -2764,5 +2795,8 @@ main(int argc, char *argv[])
 	run();
 	cleanup();
 	XCloseDisplay(dpy);
+	if (restart == 1) {
+		execlp("dwm", "dwm", NULL);
+	}
 	return EXIT_SUCCESS;
 }
