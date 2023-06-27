@@ -2,7 +2,7 @@
 
 /* appearance */
 static const unsigned int borderpx  = 2;        /* border pixel of windows */
-static const unsigned int gappx     = 10;
+static const unsigned int gappx     = 5;
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int swallowfloating    = 1;        /* 1 means swallow floating windows by default */
 static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
@@ -12,19 +12,22 @@ static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display 
 static const int showsystray        = 1;        /* 0 means no systray */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "CaskaydiaCove Nerd Font Mono:size=11:antialias=true:autohint=false" };
-static const char dmenufont[]       = "CaskaydiaCove Nerd Font Mono:size=11:antialias=true:autohint=false";
+static const char *fonts[]          = { "CaskaydiaCove Nerd Font Mono:size=9:antialias=true:autohint=false" };
+static const char dmenufont[]       = "CaskaydiaCove Nerd Font Mono:size=9:antialias=true:autohint=false";
 static const char col_gray1[]       = "#d3d7cf";
 static const char col_gray2[]       = "#d3d7cf";
 static const char col_gray3[]       = "#000000";
 static const char col_gray4[]       = "#ffffff";
 static const char col_cyan[]        = "#0000aa";
 static const char col_evergreen[]   = "#2B573D";
+static const char col_dawn_white[]  = "#F2E9E1";
+static const char col_dawn_dusk[]   = "#286983";
+static const char col_dawn_pink[]   = "#EBBCBA";
 static const char col_yellow[]      = "#F5C700";
 static const char *colors[][3]      = {
 	/*               fg         bg              border   */
-	[SchemeNorm] = { col_gray3, col_gray1,      col_evergreen},
-	[SchemeSel]  = { col_gray4, col_evergreen,  col_gray2  },
+	[SchemeNorm] = { col_gray3, col_dawn_white, col_dawn_white},
+	[SchemeSel]  = { col_gray4, col_dawn_dusk,  col_dawn_dusk  },
 };
 
 /* tagging */
@@ -72,15 +75,15 @@ static const Layout layouts[] = {
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
 /* commands */
-static const char *dmenucmd[] = { "dmenu_run", "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_evergreen, "-sf", col_gray4, NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-fn", dmenufont, "-nb", col_dawn_white, "-nf", col_gray3, "-sb", col_dawn_pink, "-sf", col_dawn_white, NULL };
 static const char *roficmd[] = { "rofi", "-show", "drun", NULL };
 static const char *powercmd[] = { "rofi", "-show", "power-menu", "-modi", "power-menu:rofi-power-menu" ,NULL };
-static const char *termcmd[]  = { "alacritty", NULL };
+static const char *termcmd[]  = { "st", NULL };
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
-	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
-	{ MODKEY|ShiftMask,             XK_p,      spawn,          {.v = roficmd } },
+	{ MODKEY,                       XK_p,      spawn,          {.v = roficmd } },
+	{ MODKEY|ShiftMask,             XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
