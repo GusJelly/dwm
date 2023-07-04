@@ -12,8 +12,8 @@ static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display 
 static const int showsystray        = 1;        /* 0 means no systray */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "CaskaydiaCove Nerd Font Mono:size=9:antialias=true:autohint=false" };
-static const char dmenufont[]       = "CaskaydiaCove Nerd Font Mono:size=9:antialias=true:autohint=false";
+static const char *fonts[]          = { "Liberation Mono:size=9:antialias=true:autohint=false" };
+static const char dmenufont[]       = "Liberation Mono:size=9:antialias=true:autohint=false";
 static const char col_gray1[]       = "#d3d7cf";
 static const char col_gray2[]       = "#d3d7cf";
 static const char col_gray3[]       = "#000000";
@@ -26,8 +26,8 @@ static const char col_dawn_pink[]   = "#EBBCBA";
 static const char col_yellow[]      = "#F5C700";
 static const char *colors[][3]      = {
 	/*               fg         bg              border   */
-	[SchemeNorm] = { col_gray3, col_dawn_white, col_dawn_white},
-	[SchemeSel]  = { col_gray4, col_dawn_dusk,  col_dawn_dusk  },
+	[SchemeNorm] = { col_gray3, col_dawn_white, col_dawn_dusk},
+	[SchemeSel]  = { col_gray4, col_dawn_dusk,  col_dawn_white},
 };
 
 /* tagging */
