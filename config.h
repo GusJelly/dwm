@@ -78,7 +78,7 @@ static const Layout layouts[] = {
 static const char *dmenucmd[] = { "dmenu_run", "-fn", dmenufont, "-nb", col_dawn_white, "-nf", col_gray3, "-sb", col_dawn_pink, "-sf", col_dawn_white, NULL };
 static const char *roficmd[] = { "rofi", "-show", "drun", NULL };
 static const char *powercmd[] = { "rofi", "-show", "power-menu", "-modi", "power-menu:rofi-power-menu" ,NULL };
-static const char *termcmd[]  = { "alacritty", NULL };
+static const char *termcmd[]  = { "tabbed", "-r", "2", "st", "-w", "''", NULL };
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
