@@ -33,8 +33,8 @@ static const char col_dawn_pink[]   = "#EBBCBA";
 static const char col_yellow[]      = "#F5C700";
 static const char *colors[][3]      = {
 	/*               fg         bg              border   */
-	[SchemeNorm] = { col_gray3, col_dawn_white, col_dawn_dusk},
-	[SchemeSel]  = { col_gray4, col_dawn_dusk,  col_dawn_white},
+	[SchemeNorm] = { col_gray3, col_dawn_white, col_evergreen},
+	[SchemeSel]  = { col_gray4, col_evergreen,  col_dawn_white},
 };
 
 /* tagging */
