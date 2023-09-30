@@ -19,7 +19,7 @@ enum showtab_modes { showtab_never, showtab_auto, showtab_nmodes, showtab_always
 static const int showtab			= showtab_auto;        /* Default tab bar show mode */
 static const int toptab				= False;               /* False means bottom tab bar */
 
-static const char *fonts[]          = { "CaskaydiaCove Nerd Font Mono:size=11:antialias=true:autohint=false" };
+static const char *fonts[]          = { "CaskaydiaCove Nerd Font Mono:size=9:antialias=true:autohint=false" };
 static const char dmenufont[]       = "CaskaydiaCove Nerd Font Mono:size=9:antialias=true:autohint=false";
 static const char col_gray1[]       = "#d3d7cf";
 static const char col_gray2[]       = "#d3d7cf";
@@ -56,7 +56,7 @@ static const Rule rules[] = {
 /* layout(s) */
 static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
 static const int nmaster     = 1;    /* number of clients in master area */
-static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
+static const int resizehints = 0;    /* 1 means respect size hints in tiled resizals */
 static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen window */
 
 #include "fibonacci.c"
