@@ -2,7 +2,7 @@
 
 /* appearance */
 static const unsigned int borderpx  = 2;        /* border pixel of windows */
-static const unsigned int gappx     = 10;
+static const unsigned int gappx     = 5;
 static const unsigned int snap      = 16;       /* snap pixel */
 static const int swallowfloating    = 1;        /* 1 means swallow floating windows by default */
 static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
@@ -11,7 +11,7 @@ static const unsigned int systrayspacing = 2;   /* systray spacing */
 static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
 static const int showsystray        = 1;        /* 0 means no systray */
 static const int showbar            = 1;        /* 0 means no bar */
-static const int topbar             = 1;        /* 0 means bottom bar */
+static const int topbar             = 0;        /* 0 means bottom bar */
 /*  Display modes of the tab bar: never shown, always shown, shown only in  */
 /*  monocle mode in the presence of several windows.                        */
 /*  Modes after showtab_nmodes are disabled.                                */
@@ -33,8 +33,8 @@ static const char col_dawn_pink[]   = "#EBBCBA";
 static const char col_yellow[]      = "#F5C700";
 static const char *colors[][3]      = {
 	/*               fg         bg              border   */
-	[SchemeNorm] = { col_gray3, col_dawn_white, col_dawn_white},
-	[SchemeSel]  = { col_gray4, col_dawn_dusk,  col_dawn_dusk},
+	[SchemeNorm] = { col_gray3, col_dawn_white, col_evergreen},
+	[SchemeSel]  = { col_gray4, col_evergreen,  col_dawn_white},
 };
 
 /* tagging */
@@ -84,7 +84,7 @@ static const Layout layouts[] = {
 
 /* commands */
 static const char *dmenucmd[] = { "dmenu_run", "-fn", dmenufont, "-nb", col_dawn_white, "-nf", col_gray3, "-sb", col_dawn_pink, "-sf", col_dawn_white, NULL };
-static const char *roficmd[] = { "rofi", "-show", "drun", NULL };
+static const char *roficmd[] = { "rofi", "-show", "-show-icons","drun", NULL };
 static const char *powercmd[] = { "rofi", "-show", "power-menu", "-modi", "power-menu:rofi-power-menu" ,NULL };
 static const char *termcmd[]  = { "alacritty", NULL };
 
